@@ -1,0 +1,32 @@
+/*
+ * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/***/ (() => {
+
+eval("let currentQuestionIndex = 0;\r\nlet score = 0;\r\n// Sample quiz questions\r\nconst quizQuestions = [\r\n  {\r\n    question: \"What is the capital of France?\",\r\n    options: [\"Paris\", \"London\", \"Berlin\", \"Rome\"],\r\n    answer: \"Paris\"\r\n  },\r\n  {\r\n    question: \"Who painted the Mona Lisa?\",\r\n    options: [\"Leonardo da Vinci\", \"Pablo Picasso\", \"Vincent van Gogh\", \"Michelangelo\"],\r\n    answer: \"Leonardo da Vinci\"\r\n  },\r\n  {\r\n    question: \"What is the largest planet in our solar system?\",\r\n    options: [\"Jupiter\", \"Mars\", \"Earth\", \"Saturn\"],\r\n    answer: \"Jupiter\"\r\n  },\r\n  {\r\n    question: \"Which country won the FIFA World Cup in 2018?\",\r\n    options: [\"France\", \"Brazil\", \"Germany\", \"Spain\"],\r\n    answer: \"France\"\r\n  },\r\n  {\r\n    question: \"Who wrote the Harry Potter book series?\",\r\n    options: [\"J.K. Rowling\", \"Stephen King\", \"George R.R. Martin\", \"Dan Brown\"],\r\n    answer: \"J.K. Rowling\"\r\n  },\r\n  {\r\n    question: \"What is the chemical symbol for gold?\",\r\n    options: [\"Au\", \"Ag\", \"Fe\", \"Cu\"],\r\n    answer: \"Au\"\r\n  },\r\n];\r\n\r\n// DOM elements\r\nconst questionContainer = document.getElementById(\"question-container\");\r\nconst questionElement = document.getElementById(\"question\");\r\nconst optionsElement = document.getElementById(\"options\");\r\nconst startButton = document.getElementById(\"start-btn\");\r\nconst prevButton = document.getElementById(\"prev-btn\");\r\nconst nextButton = document.getElementById(\"next-btn\");\r\nconst submitButton = document.getElementById(\"submit-btn\");\r\nconst restartButton = document.getElementById(\"restart-btn\");\r\nconst resultElement = document.getElementById(\"result\");\r\n\r\n\r\n\r\n// Start the quiz\r\nstartButton.addEventListener(\"click\", () => {\r\n  startButton.style.display = \"none\";\r\n  questionContainer.style.display = \"block\";\r\n  loadQuestion();\r\n});\r\n\r\n// Load question and options\r\nfunction loadQuestion() {\r\n  const currentQuestion = quizQuestions[currentQuestionIndex];\r\n  questionElement.textContent = currentQuestion.question;\r\n\r\n  optionsElement.innerHTML = \"\";\r\n  currentQuestion.options.forEach((option) => {\r\n    const liElement = document.createElement(\"li\");\r\n    const inputElement = document.createElement(\"input\");\r\n    const labelTag=document.createElement(\"label\");\r\n    inputElement.type = \"radio\";\r\n    inputElement.id=(option)\r\n    inputElement.name = \"option\";\r\n    inputElement.value = option;\r\n    labelTag.textContent = option;\r\n    labelTag.setAttribute(\"for\", option);\r\n    liElement.appendChild(labelTag);\r\n    liElement.prepend(inputElement);\r\n    optionsElement.appendChild(liElement);\r\n  });\r\n\r\n  // Show or hide previous and next buttons\r\n  if (currentQuestionIndex === 0) {\r\n    prevButton.style.display = \"none\";\r\n  } else {\r\n    prevButton.style.display = \"inline-block\";\r\n  }\r\n\r\n  if (currentQuestionIndex === quizQuestions.length - 1) {\r\n    nextButton.style.display = \"none\";\r\n    submitButton.style.display = \"inline-block\";\r\n  } else {\r\n    nextButton.style.display = \"inline-block\";\r\n    submitButton.style.display = \"none\";\r\n  }\r\n}\r\n\r\n// Check the selected answer\r\nfunction checkAnswer(selectedAnswer) {\r\n  const currentQuestion = quizQuestions[currentQuestionIndex];\r\n  if (selectedAnswer === currentQuestion.answer) {\r\n    score++;\r\n  }\r\n}\r\n\r\n// Handle submit button click\r\nsubmitButton.addEventListener(\"click\", () => {\r\n  const selectedOption = document.querySelector(\"input[type=radio]:checked\");\r\n  if (selectedOption) {\r\n    const selectedAnswer = selectedOption.value;\r\n    checkAnswer(selectedAnswer);\r\n\r\n    currentQuestionIndex++;\r\n    selectedOption.checked = false;\r\n\r\n    if (currentQuestionIndex < quizQuestions.length) {\r\n      loadQuestion();\r\n    } else {\r\n      questionContainer.style.display = \"none\";\r\n      resultElement.textContent = `Your score: ${score}/${quizQuestions.length}`;\r\n      submitButton.disabled = true; \r\n      prevButton.disabled = true;\r\n      nextButton.disabled = true;\r\n      restartButton.style.display = \"inline-block\";\r\n    }\r\n  }\r\n});\r\n\r\n// Handle previous button click\r\nprevButton.addEventListener(\"click\", () => {\r\n  if (currentQuestionIndex > 0) {\r\n    currentQuestionIndex--;\r\n    loadQuestion();\r\n  }\r\n});\r\n\r\n// Handle next button click\r\nnextButton.addEventListener(\"click\", () => {\r\n  if (currentQuestionIndex < quizQuestions.length - 1) {\r\n    const selectedOption = document.querySelector(\"input[type=radio]:checked\");\r\n    const selectedAnswer = selectedOption.value;\r\n    checkAnswer(selectedAnswer);\r\n    currentQuestionIndex++;\r\n    loadQuestion();\r\n  }\r\n});\r\n\r\n// Handle restart button click\r\nrestartButton.addEventListener(\"click\", () => {\r\n  location.reload();\r\n});\r\n\r\n\n\n//# sourceURL=webpack://quiz-applicatoin/./src/index.js?");
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	var __webpack_exports__ = {};
+/******/ 	__webpack_modules__["./src/index.js"]();
+/******/ 	
+/******/ })()
+;

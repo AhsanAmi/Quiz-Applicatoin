@@ -1,0 +1,33 @@
+.quiz-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  h1 {
+    color: #333;
+  }
+  
+  #question {
+    font-weight: bold;
+  }
+  
+  #options {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  #options li {
+    margin-bottom: 10px;
+  }
+  
+  #submit-btn {
+    margin-top: 20px;
+  }
+  
+  #result {
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  
