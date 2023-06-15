@@ -29,21 +29,19 @@ This is a simple quiz application built with JavaScript. It presents a set of qu
 <h3> Input Task Section</h3>
 <img src="./src/images/3.png"> -->
 
+## Customization
 
-# Build with
-  <li>
-    HTML5
-  </li>
-    <li>
-    CSS3
-  </li>
-    <li>
-    JavaScript
-  </li>
-      <li>
-     Webpacks
-  </li>
-  
+You can customize the quiz by modifying the `quizQuestions` array in the JavaScript code. Each question object consists of the question itself, an array of options, and the correct answer.
+
+You can also adjust the time limit per question by changing the `timeLimitPerQuestion` variable in the JavaScript code. By default, it is set to 10 seconds.
+
+## Technologies Used
+
+- HTML
+- CSS
+- JavaScript
+- Webpacks
+
   
 # Getting Started 🚀
 
