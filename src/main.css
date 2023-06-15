@@ -1,111 +1,115 @@
-body{
-  background-color: #E3EDFC;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  box-sizing: border-box;
-  margin: 0;
-  overflow: hidden;
-
+body {
+	background-color: #E3EDFC;
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+	box-sizing: border-box;
+	margin: 0;
+	overflow: hidden;
 }
+
 .quiz-container {
-  width: 600px;
-  margin: 0 auto;
-  padding: 0px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 1rem;
-  background-color: white;
-  border-radius: 1rem;
-  box-shadow: 0 0 10px 2px rgba(100, 100, 100, 0.1) ;
-  overflow: hidden;
+	width: 600px;
+	margin: 0 auto;
+	padding: 0px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 1rem;
+	background-color: white;
+	border-radius: 1rem;
+	box-shadow: 0 0 10px 2px rgba(100, 100, 100, 0.1);
+	overflow: hidden;
 }
 
 h1 {
-  color: #333;
-
+	color: #333;
 }
 
 #question {
-  font-weight: bold;
-  font-size: 2rem;
-
+	font-weight: bold;
+	font-size: 2rem;
 }
 
 #options {
-  list-style-type: none;
-  font-size: 1.4rem;
-  font-weight: 100;
-  padding: 0;
-
+	list-style-type: none;
+	font-size: 1.4rem;
+	font-weight: 100;
+	padding: 0;
 }
 
 #options li {
-  margin-bottom: 10px;
-  margin: 1.5rem 2rem;
-
+	margin-bottom: 10px;
+	margin: 1.5rem 2rem;
 }
 
 #submit-btn {
-  margin-top: 10px;
-  width: 600px;
-height: 50px;
-font-size: 1.5rem;
-background-color:blueviolet;
-color: #E3EDFC;
-border: none;
+	margin-top: 10px;
+	width: 600px;
+	height: 50px;
+	font-size: 1.5rem;
+	background-color: blueviolet;
+	color: #E3EDFC;
+	border: none;
 }
-#next-btn{
-width: 600px;
-height: 50px;
-font-size: 1.5rem;
-background-color:darkolivegreen;
-color: #E3EDFC;
-border: none;
-}
-#next-btn:hover{
-  width: 600px;
-  height: 50px;
-  font-size: 1.5rem;
-  background-color:#333;
-  color: #E3EDFC;
-  border: none;
-  }
-#prev-btn{
-  margin-top: 10px;
-  width: 600px;
-height: 50px;
-font-size: 1.5rem;
-background-color:red;
-color: #E3EDFC;
-border: none;
-}
-#prev-btn:hover{
-  background-color:#333;
-}
-#restart-btn,#start-btn{
-  width: 600px;
-  height: 50px;
-  font-size: 1.5rem;
-  background-color:blueviolet;
-  color: #E3EDFC;
-  border: none;
-}
-#restart-btn:hover{
-  background-color:#333;
 
+#next-btn {
+	width: 600px;
+	height: 50px;
+	font-size: 1.5rem;
+	background-color: darkolivegreen;
+	color: #E3EDFC;
+	border: none;
 }
+
+#next-btn:hover {
+	width: 600px;
+	height: 50px;
+	font-size: 1.5rem;
+	background-color: #333;
+	color: #E3EDFC;
+	border: none;
+}
+
+#prev-btn {
+	margin-top: 10px;
+	width: 600px;
+	height: 50px;
+	font-size: 1.5rem;
+	background-color: red;
+	color: #E3EDFC;
+	border: none;
+}
+
+#prev-btn:hover {
+	background-color: #333;
+}
+
+#restart-btn,
+#start-btn {
+	width: 600px;
+	height: 50px;
+	font-size: 1.5rem;
+	background-color: blueviolet;
+	color: #E3EDFC;
+	border: none;
+}
+
+#restart-btn:hover {
+	background-color: #333;
+}
+
 #result {
-  font-weight: bold;
-  margin-top: 20px;
-  font-size: 2rem;
-  text-align: center;
+	font-weight: bold;
+	margin-top: 20px;
+	font-size: 2rem;
+	text-align: center;
 }
 
-label{
-  cursor: pointer;
-  padding-left: 1rem;
+label {
+	cursor: pointer;
+	padding-left: 1rem;
 }
-button{
-  cursor: pointer;
+
+button {
+	cursor: pointer;
 }
