@@ -1,14 +1,23 @@
 # Quiz-Applicatoin
-
+This is a simple quiz application built with JavaScript. It presents a set of quiz questions to the user and allows them to select answers. The application tracks the user's score and includes a timer for each question
 # Live Demo 🎥
 <a href="https://ahsanami.github.io/Quiz-Applicatoin/">Live Demo Link</a>
 
 # Features
-<!-- <b>Task Creation:</b> The ability to create and add new tasks to the list. This includes specifying a task title, description, due date, priority, and any other relevant details.
-<br>
-<b>Task Organization:</b> Options for categorizing or grouping tasks into different lists or categories, such as personal, work, shopping, or custom categories based on your needs.
-<br>
-<b>Data Store:</b> Data Store in Browser Local Storege -->
+- Multiple-choice quiz questions with options
+- Score tracking
+- Timer for each question
+
+## How to Use
+
+1. Clone the repository to your local machine.
+2. Open the `index.html` file in your web browser.
+3. The quiz will start when you click the "Start" button.
+4. Read each question and select your answer from the provided options.
+5. Click the "Next" button to move to the next question.
+6. If you want to go back to the previous question, click the "Previous" button.
+7. Once you have answered all the questions, click the "Submit" button to see your score.
+8. You can restart the quiz by clicking the "Restart" button.
 
 # ScreenShoot
 <!-- <img src="./src/images/1.png">
