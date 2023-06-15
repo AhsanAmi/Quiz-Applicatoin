@@ -127,18 +127,32 @@ prevButton.addEventListener("click", () => {
   if (currentQuestionIndex > 0) {
     currentQuestionIndex--;
     loadQuestion();
+    var radioList = document.getElementById("options");
+    var radioButtons = radioList.getElementsByTagName("input");
+    for (var i = 0; i < radioButtons.length; i++) {
+      radioButtons[i].disabled = true;
+    }
+    
   }
 });
 
 // Handle next button click
 nextButton.addEventListener("click", () => {
-  if (currentQuestionIndex < quizQuestions.length - 1) {
-    const selectedOption = document.querySelector("input[type=radio]:checked");
-    const selectedAnswer = selectedOption.value;
-    checkAnswer(selectedAnswer);
+  var selectedRadioButton = document.querySelector('input[name="option"]:checked');
+
+  if (selectedRadioButton) {
+    if (currentQuestionIndex < quizQuestions.length - 1) {
+      const selectedOption = document.querySelector("input[type=radio]:checked");
+      const selectedAnswer = selectedOption.value;
+      checkAnswer(selectedAnswer);
+      currentQuestionIndex++;
+      loadQuestion();
+    }
+  } else {
     currentQuestionIndex++;
     loadQuestion();
   }
+
 });
 
 // Handle restart button click
