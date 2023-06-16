@@ -1,5 +1,6 @@
 import './main.css'
 import quizQuestions from './questionArray'
+import { loadQuestion } from './loadQuestion';
 let userAnswers = [];
 let currentQuestionIndex = 0;
 let score = 0;
@@ -19,51 +20,9 @@ startButton.addEventListener( "click", () => {
 	startButton.style.display = "none";
 	questionContainer.style.display = "block";
 	startTimer(); // Start timer for the current question
-	loadQuestion();
+	loadQuestion(currentQuestionIndex,userAnswers);   //currentQuestionIndex,userAnswers
 } );
-// Load question and options
-function loadQuestion() {
-	const currentQuestion = quizQuestions[currentQuestionIndex];
-	questionElement.textContent = currentQuestion.question;
-	optionsElement.innerHTML = "";
-	
-	currentQuestion.options.forEach((option) => {
-	  const liElement = document.createElement("li");
-	  const inputElement = document.createElement("input");
-	  const labelTag = document.createElement("label");
-	  inputElement.type = "radio";
-	  inputElement.id = option;
-	  inputElement.name = "option";
-	  inputElement.value = option;
-	  labelTag.textContent = option;
-	  labelTag.setAttribute("for", option);
-	  liElement.appendChild(labelTag);
-	  liElement.prepend(inputElement);
-	  
-	  // Check if the user has answered the current question previously
-	  const previousAnswer = userAnswers[currentQuestionIndex];
-	  if (previousAnswer && previousAnswer === option) {
-		inputElement.checked = true; // Pre-select the previous answer
-	  }
-	  
-	  optionsElement.appendChild(liElement);
-	});
-	
-	// Show or hide previous and next buttons
-	if (currentQuestionIndex === 0) {
-	  prevButton.style.display = "none";
-	} else {
-	  prevButton.style.display = "inline-block";
-	}
-	
-	if (currentQuestionIndex === quizQuestions.length - 1) {
-	  nextButton.style.display = "none";
-	  submitButton.style.display = "inline-block";
-	} else {
-	  nextButton.style.display = "inline-block";
-	  submitButton.style.display = "none";
-	}
-  }
+
   
 // Check the selected answer
 function checkAnswer(selectedAnswer) {
@@ -81,7 +40,7 @@ submitButton.addEventListener("click", () => {
 	  currentQuestionIndex++;
 	  
 	  if (currentQuestionIndex < quizQuestions.length) {
-		loadQuestion();
+		loadQuestion(currentQuestionIndex,userAnswers);
 	  } else {
 		// All questions have been answered, calculate the score
 		calculateScore();
@@ -99,7 +58,7 @@ submitButton.addEventListener("click", () => {
 prevButton.addEventListener( "click", () => {
 	if ( currentQuestionIndex > 0 ) {
 		currentQuestionIndex--;
-		loadQuestion();
+		loadQuestion(currentQuestionIndex,userAnswers);
 		var radioList = document.getElementById( "options" );
 		var radioButtons = radioList.getElementsByTagName( "input" );
 	}
@@ -113,7 +72,7 @@ nextButton.addEventListener( "click", () => {
 			const selectedAnswer = selectedRadioButton.value;
 			checkAnswer( selectedAnswer );
 			currentQuestionIndex++;
-			loadQuestion();
+			loadQuestion(currentQuestionIndex,userAnswers);
 		}
 	}
 } );
