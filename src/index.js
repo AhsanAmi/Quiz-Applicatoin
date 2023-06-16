@@ -127,10 +127,11 @@ nextButton.addEventListener( "click", () => {
 			currentQuestionIndex++;
 			loadQuestion();
 		}
-	} else {
-		currentQuestionIndex++;
-		loadQuestion();
 	}
+	//  else {
+	// 	currentQuestionIndex++;
+	// 	loadQuestion();
+	// }
 } );
 // Handle restart button click
 restartButton.addEventListener( "click", () => {
@@ -140,7 +141,7 @@ restartButton.addEventListener( "click", () => {
 
 
 let timer;
-const timeLimitPerQuestion = 3; // Time limit in seconds for each question
+const timeLimitPerQuestion = 10; // Time limit in seconds for each question
 // Start the timer
 function startTimer() {
 	let timeRemaining = timeLimitPerQuestion;
