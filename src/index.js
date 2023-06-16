@@ -1,8 +1,7 @@
 import './main.css'
+
 let currentQuestionIndex = 0;
 let score = 0;
-let timer;
-const timeLimitPerQuestion = 10; // Time limit in seconds for each question
 // Sample quiz questions
 const quizQuestions = [ {
 	question: "Q:1 What is the capital of France?"
@@ -43,12 +42,11 @@ const resultElement = document.getElementById( "result" );
 startButton.addEventListener( "click", () => {
 	startButton.style.display = "none";
 	questionContainer.style.display = "block";
+	startTimer(); // Start timer for the current question
 	loadQuestion();
 } );
 // Load question and options
-function loadQuestion() {
-	resetTimer(); // Reset timer for each question
-	startTimer(); // Start timer for the current question
+function loadQuestion() {	
 	const currentQuestion = quizQuestions[ currentQuestionIndex ];
 	questionElement.textContent = currentQuestion.question;
 	optionsElement.innerHTML = "";
@@ -90,7 +88,7 @@ function checkAnswer( selectedAnswer ) {
 // Handle submit button click
 submitButton.addEventListener( "click", () => {
 	const selectedOption = document.querySelector( "input[type=radio]:checked" );
-	if ( selectedOption ) {
+	if ( selectedOption )  {
 		const selectedAnswer = selectedOption.value;
 		checkAnswer( selectedAnswer );
 		currentQuestionIndex++;
@@ -123,8 +121,8 @@ nextButton.addEventListener( "click", () => {
 	var selectedRadioButton = document.querySelector( 'input[name="option"]:checked' );
 	if ( selectedRadioButton ) {
 		if ( currentQuestionIndex < quizQuestions.length - 1 ) {
-			const selectedOption = document.querySelector( "input[type=radio]:checked" );
-			const selectedAnswer = selectedOption.value;
+			// const selectedOption = document.querySelector( "input[type=radio]:checked" );
+			const selectedAnswer = selectedRadioButton.value;
 			checkAnswer( selectedAnswer );
 			currentQuestionIndex++;
 			loadQuestion();
@@ -138,6 +136,11 @@ nextButton.addEventListener( "click", () => {
 restartButton.addEventListener( "click", () => {
 	location.reload();
 } );
+
+
+
+let timer;
+const timeLimitPerQuestion = 3; // Time limit in seconds for each question
 // Start the timer
 function startTimer() {
 	let timeRemaining = timeLimitPerQuestion;
@@ -150,10 +153,6 @@ function startTimer() {
 			handleTimeout();
 		}
 	}, 1000 );
-}
-// Reset the timer
-function resetTimer() {
-	clearInterval( timer );
 }
 // Update the timer display
 function updateTimerDisplay( time ) {
@@ -168,17 +167,19 @@ function handleTimeout() {
 			const selectedOption = document.querySelector( "input[type=radio]:checked" );
 			const selectedAnswer = selectedOption.value;
 			checkAnswer( selectedAnswer );
-			currentQuestionIndex++;
-			loadQuestion();
-		}
-	} else if ( currentQuestionIndex < quizQuestions.length ) {
-		currentQuestionIndex++;
-		loadQuestion();
-	} else {
 		questionContainer.style.display = "none";
 		resultElement.textContent = `Your score: ${score}/${quizQuestions.length}`;
 		restartButton.style.display = "inline-block";
 		submitButton.style.display = "none";
 		prevButton.style.display = "none";
+		nextButton.style.display = "none";
+		}
+	}  else {
+		questionContainer.style.display = "none";
+		resultElement.textContent = `Your score: ${score}/${quizQuestions.length}`;
+		restartButton.style.display = "inline-block";
+		submitButton.style.display = "none";
+		prevButton.style.display = "none";
+		nextButton.style.display = "none";
 	}
 }
