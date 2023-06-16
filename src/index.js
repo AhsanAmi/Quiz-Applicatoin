@@ -1,5 +1,5 @@
 import './main.css'
-
+let userAnswers = [];
 let currentQuestionIndex = 0;
 let score = 0;
 // Sample quiz questions
@@ -46,64 +46,79 @@ startButton.addEventListener( "click", () => {
 	loadQuestion();
 } );
 // Load question and options
-function loadQuestion() {	
-	const currentQuestion = quizQuestions[ currentQuestionIndex ];
+function loadQuestion() {
+	const currentQuestion = quizQuestions[currentQuestionIndex];
 	questionElement.textContent = currentQuestion.question;
 	optionsElement.innerHTML = "";
-	currentQuestion.options.forEach( ( option ) => {
-		const liElement = document.createElement( "li" );
-		const inputElement = document.createElement( "input" );
-		const labelTag = document.createElement( "label" );
-		inputElement.type = "radio";
-		inputElement.id = ( option )
-		inputElement.name = "option";
-		inputElement.value = option;
-		labelTag.textContent = option;
-		labelTag.setAttribute( "for", option );
-		liElement.appendChild( labelTag );
-		liElement.prepend( inputElement );
-		optionsElement.appendChild( liElement );
-	} );
+	
+	currentQuestion.options.forEach((option) => {
+	  const liElement = document.createElement("li");
+	  const inputElement = document.createElement("input");
+	  const labelTag = document.createElement("label");
+	  inputElement.type = "radio";
+	  inputElement.id = option;
+	  inputElement.name = "option";
+	  inputElement.value = option;
+	  labelTag.textContent = option;
+	  labelTag.setAttribute("for", option);
+	  liElement.appendChild(labelTag);
+	  liElement.prepend(inputElement);
+	  
+	  // Check if the user has answered the current question previously
+	  const previousAnswer = userAnswers[currentQuestionIndex];
+	  if (previousAnswer && previousAnswer === option) {
+		inputElement.checked = true; // Pre-select the previous answer
+	  }
+	  
+	  optionsElement.appendChild(liElement);
+	});
+	
 	// Show or hide previous and next buttons
-	if ( currentQuestionIndex === 0 ) {
-		prevButton.style.display = "none";
+	if (currentQuestionIndex === 0) {
+	  prevButton.style.display = "none";
 	} else {
-		prevButton.style.display = "inline-block";
+	  prevButton.style.display = "inline-block";
 	}
-	if ( currentQuestionIndex === quizQuestions.length - 1 ) {
-		nextButton.style.display = "none";
-		submitButton.style.display = "inline-block";
+	
+	if (currentQuestionIndex === quizQuestions.length - 1) {
+	  nextButton.style.display = "none";
+	  submitButton.style.display = "inline-block";
 	} else {
-		nextButton.style.display = "inline-block";
-		submitButton.style.display = "none";
+	  nextButton.style.display = "inline-block";
+	  submitButton.style.display = "none";
 	}
-}
+  }
+  
 // Check the selected answer
-function checkAnswer( selectedAnswer ) {
-	const currentQuestion = quizQuestions[ currentQuestionIndex ];
-	if ( selectedAnswer === currentQuestion.answer ) {
-		score++;
-	}
-}
+function checkAnswer(selectedAnswer) {
+	userAnswers[currentQuestionIndex] = selectedAnswer; // Store the selected answer
+	// No need to update the score here
+  }
+  
 // Handle submit button click
-submitButton.addEventListener( "click", () => {
-	const selectedOption = document.querySelector( "input[type=radio]:checked" );
-	if ( selectedOption )  {
-		const selectedAnswer = selectedOption.value;
-		checkAnswer( selectedAnswer );
-		currentQuestionIndex++;
-		selectedOption.checked = false;
-		if ( currentQuestionIndex < quizQuestions.length ) {
-			loadQuestion();
-		} else {
-			questionContainer.style.display = "none";
-			resultElement.textContent = `Your score: ${score}/${quizQuestions.length}`;
-			restartButton.style.display = "inline-block";
-			submitButton.style.display = "none";
-			prevButton.style.display = "none";
-		}
+submitButton.addEventListener("click", () => {
+	const selectedOption = document.querySelector("input[type=radio]:checked");
+	if (selectedOption) {
+	  const selectedAnswer = selectedOption.value;
+	  checkAnswer(selectedAnswer);
+	  selectedOption.checked = false;
+	  currentQuestionIndex++;
+	  
+	  if (currentQuestionIndex < quizQuestions.length) {
+		loadQuestion();
+	  } else {
+		// All questions have been answered, calculate the score
+		calculateScore();
+		
+		questionContainer.style.display = "none";
+		resultElement.textContent = `Your score: ${score}/${quizQuestions.length}`;
+		restartButton.style.display = "inline-block";
+		submitButton.style.display = "none";
+		prevButton.style.display = "none";
+	  }
 	}
-} );
+  });
+  
 // Handle previous button click
 prevButton.addEventListener( "click", () => {
 	if ( currentQuestionIndex > 0 ) {
@@ -111,9 +126,6 @@ prevButton.addEventListener( "click", () => {
 		loadQuestion();
 		var radioList = document.getElementById( "options" );
 		var radioButtons = radioList.getElementsByTagName( "input" );
-		for ( var i = 0; i < radioButtons.length; i++ ) {
-			radioButtons[ i ].disabled = true;
-		}
 	}
 } );
 // Handle next button click
@@ -128,10 +140,6 @@ nextButton.addEventListener( "click", () => {
 			loadQuestion();
 		}
 	}
-	//  else {
-	// 	currentQuestionIndex++;
-	// 	loadQuestion();
-	// }
 } );
 // Handle restart button click
 restartButton.addEventListener( "click", () => {
@@ -141,7 +149,7 @@ restartButton.addEventListener( "click", () => {
 
 
 let timer;
-const timeLimitPerQuestion = 10; // Time limit in seconds for each question
+const timeLimitPerQuestion = 60; // Time limit in seconds for each question
 // Start the timer
 function startTimer() {
 	let timeRemaining = timeLimitPerQuestion;
@@ -162,20 +170,16 @@ function updateTimerDisplay( time ) {
 }
 // Handle timeout when the time limit is reached
 function handleTimeout() {
-	var selectedRadioButton = document.querySelector( 'input[name="option"]:checked' );
-	if ( selectedRadioButton ) {
-		if ( currentQuestionIndex < quizQuestions.length - 1 ) {
-			const selectedOption = document.querySelector( "input[type=radio]:checked" );
-			const selectedAnswer = selectedOption.value;
-			checkAnswer( selectedAnswer );
-		questionContainer.style.display = "none";
-		resultElement.textContent = `Your score: ${score}/${quizQuestions.length}`;
-		restartButton.style.display = "inline-block";
-		submitButton.style.display = "none";
-		prevButton.style.display = "none";
-		nextButton.style.display = "none";
-		}
-	}  else {
+	const selectedOption = document.querySelector("input[type=radio]:checked");
+	if (selectedOption) {
+	  const selectedAnswer = selectedOption.value;
+	  checkAnswer(selectedAnswer);
+	  selectedOption.checked = false;
+	  currentQuestionIndex++;
+	
+		// All questions have been answered, calculate the score
+		calculateScore();
+		
 		questionContainer.style.display = "none";
 		resultElement.textContent = `Your score: ${score}/${quizQuestions.length}`;
 		restartButton.style.display = "inline-block";
@@ -183,4 +187,28 @@ function handleTimeout() {
 		prevButton.style.display = "none";
 		nextButton.style.display = "none";
 	}
+	else {
+		// All questions have been answered, calculate the score
+		calculateScore();
+		questionContainer.style.display = "none";
+		resultElement.textContent = `Your score: ${score}/${quizQuestions.length}`;
+		restartButton.style.display = "inline-block";
+		submitButton.style.display = "none";
+		prevButton.style.display = "none";
+		nextButton.style.display = "none";
+	  }
 }
+
+
+function calculateScore() {
+	score = 0; // Reset the score
+	
+	quizQuestions.forEach((question, index) => {
+	  const correctAnswer = question.answer;
+	  const userAnswer = userAnswers[index];
+	  
+	  if (userAnswer === correctAnswer) {
+		score++;
+	  }
+	});
+  }
