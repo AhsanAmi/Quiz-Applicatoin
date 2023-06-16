@@ -6,7 +6,7 @@ This is a simple quiz application built with JavaScript. It presents a set of qu
 # Features
 - Multiple-choice quiz questions with options
 - Score tracking
-- Timer for each question
+- Timer 
 
 ## How to Use
 
@@ -33,7 +33,7 @@ This is a simple quiz application built with JavaScript. It presents a set of qu
 
 You can customize the quiz by modifying the `quizQuestions` array in the JavaScript code. Each question object consists of the question itself, an array of options, and the correct answer.
 
-You can also adjust the time limit per question by changing the `timeLimitPerQuestion` variable in the JavaScript code. By default, it is set to 10 seconds.
+You can also adjust the time limit for question by changing the `timeLimitPerQuestion` variable in the JavaScript code. By default, it is set to 60 seconds.
 
 ## Technologies Used
 
