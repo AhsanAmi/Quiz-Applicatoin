@@ -20,15 +20,13 @@ This is a simple quiz application built with JavaScript. It presents a set of qu
 8. You can restart the quiz by clicking the "Restart" button.
 
 # ScreenShoot
-<!-- <img src="./src/images/1.png">
-
+<img src="./src/images/q1.png">
 <br>
-<h3> Edit Task Section</h3>
-<img src="./src/images/2.png">
+<img src="./src/images/q2.png">
 <br>
-<h3> Input Task Section</h3>
-<img src="./src/images/3.png"> -->
-
+<img src="./src/images/q3.png">
+<br>
+<img src="./src/images/q4.png">
 ## Customization
 
 You can customize the quiz by modifying the `quizQuestions` array in the JavaScript code. Each question object consists of the question itself, an array of options, and the correct answer.
