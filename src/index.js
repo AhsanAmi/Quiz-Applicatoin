@@ -29,10 +29,25 @@ startButton.addEventListener( "click", () => {
 } );
 
   
-// Check the selected answer
+// Store the selected answer
 function checkAnswer(selectedAnswer) {
-	userAnswers[currentQuestionIndex] = selectedAnswer; // Store the selected answer
+	userAnswers[currentQuestionIndex] = selectedAnswer; 
   }
+
+  function calculateScore(userAnswers) {
+	score = 0; // Reset the score
+   
+   quizQuestions.forEach((question, index) => {
+	 const correctAnswer = question.answer;
+	 const userAnswer = userAnswers[index];
+	 
+	 if (userAnswer === correctAnswer) {
+	   score++;
+	 }
+   });
+ }
+
+
   
 // Handle submit button click
 submitButton.addEventListener("click", () => {
@@ -64,8 +79,6 @@ prevButton.addEventListener( "click", () => {
 	if ( currentQuestionIndex > 0 ) {
 		currentQuestionIndex--;
 		loadQuestion(currentQuestionIndex,userAnswers);
-		var radioList = document.getElementById( "options" );
-		var radioButtons = radioList.getElementsByTagName( "input" );
 	}
 } );
 // Handle next button click
@@ -73,7 +86,6 @@ nextButton.addEventListener( "click", () => {
 	var selectedRadioButton = document.querySelector( 'input[name="option"]:checked' );
 	if ( selectedRadioButton ) {
 		if ( currentQuestionIndex < quizQuestions.length - 1 ) {
-			// const selectedOption = document.querySelector( "input[type=radio]:checked" );
 			const selectedAnswer = selectedRadioButton.value;
 			checkAnswer( selectedAnswer );
 			currentQuestionIndex++;
@@ -93,8 +105,10 @@ const timeLimitPerQuestion = 60; // Time limit in seconds for each question
 // Start the timer
 function startTimer() {
 	let timeRemaining = timeLimitPerQuestion;
-	updateTimerDisplay( timeRemaining );
-	timer = setInterval( () => {
+	updateTimerDisplay( timeRemaining );   // This function call updates the timer display on the HTML page with the initial time remaining.
+	
+	//The provided arrow function will be executed every 1000 milliseconds (1 second) until stopped.+
+	timer = setInterval( () => {                
 		timeRemaining--;
 		updateTimerDisplay( timeRemaining );
 		if ( timeRemaining <= 0 ) {
@@ -138,20 +152,3 @@ function handleTimeout() {
 		nextButton.style.display = "none";
 	  }
 }
-
-
-function calculateScore(userAnswers) {
-	score = 0; // Reset the score
-   
-   quizQuestions.forEach((question, index) => {
-	 const correctAnswer = question.answer;
-	 const userAnswer = userAnswers[index];
-	 
-	 if (userAnswer === correctAnswer) {
-	   score++;
-	 }
-   });
- }
-
-
-
