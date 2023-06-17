@@ -1,12 +1,14 @@
 import './main.css'
 import quizQuestions from './questionArray'
 import { loadQuestion } from './loadQuestion';
+// import { calculateScore } from "./scoreCalculator";
 let userAnswers = [];
 let currentQuestionIndex = 0;
 let score = 0;
 
 // DOM elements
 const questionContainer = document.getElementById( "question-container" );
+const rulesContainer = document.getElementById( "rules-and-regulations-container" );
 const questionElement = document.getElementById( "question" );
 const optionsElement = document.getElementById( "options" );
 const startButton = document.getElementById( "start-btn" );
@@ -18,6 +20,7 @@ const resultElement = document.getElementById( "result" );
 // Start the quiz
 startButton.addEventListener( "click", () => {
 	startButton.style.display = "none";
+	rulesContainer.style.display = "none";
 	questionContainer.style.display = "block";
 	startTimer(); // Start timer for the current question
 	loadQuestion(currentQuestionIndex,userAnswers);   //currentQuestionIndex,userAnswers
@@ -27,7 +30,6 @@ startButton.addEventListener( "click", () => {
 // Check the selected answer
 function checkAnswer(selectedAnswer) {
 	userAnswers[currentQuestionIndex] = selectedAnswer; // Store the selected answer
-	// No need to update the score here
   }
   
 // Handle submit button click
@@ -43,7 +45,7 @@ submitButton.addEventListener("click", () => {
 		loadQuestion(currentQuestionIndex,userAnswers);
 	  } else {
 		// All questions have been answered, calculate the score
-		calculateScore();
+		 calculateScore(userAnswers,score);
 		
 		questionContainer.style.display = "none";
 		resultElement.textContent = `Your score: ${score}/${quizQuestions.length}`;
@@ -113,7 +115,7 @@ function handleTimeout() {
 	  currentQuestionIndex++;
 	
 		// All questions have been answered, calculate the score
-		calculateScore();
+		(userAnswers,score);
 		
 		questionContainer.style.display = "none";
 		resultElement.textContent = `Your score: ${score}/${quizQuestions.length}`;
@@ -124,7 +126,7 @@ function handleTimeout() {
 	}
 	else {
 		// All questions have been answered, calculate the score
-		calculateScore();
+		 calculateScore(userAnswers,score);
 		questionContainer.style.display = "none";
 		resultElement.textContent = `Your score: ${score}/${quizQuestions.length}`;
 		restartButton.style.display = "inline-block";
@@ -135,15 +137,18 @@ function handleTimeout() {
 }
 
 
-function calculateScore() {
+function calculateScore(userAnswers) {
 	score = 0; // Reset the score
-	
-	quizQuestions.forEach((question, index) => {
-	  const correctAnswer = question.answer;
-	  const userAnswer = userAnswers[index];
-	  
-	  if (userAnswer === correctAnswer) {
-		score++;
-	  }
-	});
-  }
+   
+   quizQuestions.forEach((question, index) => {
+	 const correctAnswer = question.answer;
+	 const userAnswer = userAnswers[index];
+	 
+	 if (userAnswer === correctAnswer) {
+	   score++;
+	 }
+   });
+ }
+
+
+
