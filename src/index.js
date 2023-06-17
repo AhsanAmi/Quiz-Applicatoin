@@ -9,6 +9,7 @@ let score = 0;
 // DOM elements
 const questionContainer = document.getElementById( "question-container" );
 const rulesContainer = document.getElementById( "rules-and-regulations-container" );
+const resultContainer = document.getElementById( "end-quiz-container" );
 const questionElement = document.getElementById( "question" );
 const optionsElement = document.getElementById( "options" );
 const startButton = document.getElementById( "start-btn" );
@@ -17,6 +18,7 @@ const nextButton = document.getElementById( "next-btn" );
 const submitButton = document.getElementById( "submit-btn" );
 const restartButton = document.getElementById( "restart-btn" );
 const resultElement = document.getElementById( "result" );
+
 // Start the quiz
 startButton.addEventListener( "click", () => {
 	startButton.style.display = "none";
@@ -50,6 +52,7 @@ submitButton.addEventListener("click", () => {
 		questionContainer.style.display = "none";
 		resultElement.textContent = `Your score: ${score}/${quizQuestions.length}`;
 		restartButton.style.display = "inline-block";
+		resultContainer.style.display = "inline-block";
 		submitButton.style.display = "none";
 		prevButton.style.display = "none";
 	  }

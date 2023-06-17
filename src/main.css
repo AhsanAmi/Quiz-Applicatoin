@@ -123,3 +123,10 @@ button {
 .no-copy {
 	user-select: none;
   }
+  .emoji {
+	font-size: 28px;
+	margin-right: 5px;
+  }
+  #end-quiz-container{
+	display: none;
+  }
